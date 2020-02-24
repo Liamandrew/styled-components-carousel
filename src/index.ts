@@ -1,1 +1,1 @@
-export const Carousel = () => 'Carousel';
+export { default } from './Carousel';

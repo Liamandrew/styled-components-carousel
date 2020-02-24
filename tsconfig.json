@@ -1,10 +1,20 @@
 {
     "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
+      "jsx": "react",
+      "outDir": "./dist",
+      "target": "esnext",
+      "module": "esnext",
+      "moduleResolution": "node",
+      "declarationDir": "./dist",
+      "strict": true,
+      "allowJs": false,
+      "sourceMap": true,
       "declaration": true,
-      "outDir": "./lib",
-      "strict": true
+      "skipLibCheck": true,
+      "noUnusedLocals": true,
+      "removeComments": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
     },
     "include": ["src"],
     "exclude": ["node_modules", "**/__tests__/*"]
