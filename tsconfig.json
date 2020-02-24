@@ -8,7 +8,7 @@
       "lib": ["es5", "es6", "es7", "es2017", "dom"],
       "declarationDir": "./dist",
       "strict": true,
-      "allowJs": false,
+      "allowJs": true,
       "sourceMap": true,
       "declaration": true,
       "skipLibCheck": true,
