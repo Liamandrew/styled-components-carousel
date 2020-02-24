@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "jsx": "react",
+      "outDir": "./dist",
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "lib": ["es5", "es6", "es7", "es2017", "dom"],
+      "declarationDir": "./dist",
+      "strict": true,
+      "allowJs": false,
+      "sourceMap": true,
+      "declaration": true,
+      "skipLibCheck": true,
+      "noUnusedLocals": true,
+      "removeComments": true,
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "**/__tests__/*", "stories"]
+}
