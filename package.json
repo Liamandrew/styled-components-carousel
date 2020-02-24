@@ -2,26 +2,35 @@
   "name": "styled-components-carousel",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepublishOnly" : "npm test && npm run lint",
+    "prepare": "npm run build",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Liamandrew/styled-components-carousel.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["Carousel", "Styled", "Slider", "Slick"],
+  "author": "Liam Andrew",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Liamandrew/styled-components-carousel/issues"
   },
   "homepage": "https://github.com/Liamandrew/styled-components-carousel#readme",
   "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "jest": "^25.1.0",
     "prettier": "^1.19.1",
+    "ts-jest": "^25.2.1",
     "tslint": "^6.0.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.2"
