@@ -95,7 +95,7 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
             window.removeEventListener('resize', handleWindowResize);
         };
     }, [onWindowResize]);
-    console.log('sliderWidth: ', sliderWidth);
+
     return (
         <Slider
             className="carousel"

@@ -3,3 +3,4 @@ stories
 tsconfig.json
 tslint.json
 .prettierrc
+setupTests.js
