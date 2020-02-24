@@ -1,4 +1,5 @@
 src
+stories
 tsconfig.json
 tslint.json
 .prettierrc

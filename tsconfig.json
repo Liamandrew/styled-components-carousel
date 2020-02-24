@@ -2,9 +2,10 @@
     "compilerOptions": {
       "jsx": "react",
       "outDir": "./dist",
-      "target": "esnext",
-      "module": "esnext",
+      "target": "es5",
+      "module": "commonjs",
       "moduleResolution": "node",
+      "lib": ["es5", "es6", "es7", "es2017", "dom"],
       "declarationDir": "./dist",
       "strict": true,
       "allowJs": false,
@@ -17,5 +18,5 @@
       "allowSyntheticDefaultImports": true
     },
     "include": ["src"],
-    "exclude": ["node_modules", "**/__tests__/*"]
+    "exclude": ["node_modules", "**/__tests__/*", "stories"]
 }
