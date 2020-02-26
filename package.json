@@ -30,7 +30,7 @@
     "styled"
   ],
   "author": "Liam Andrew",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Liamandrew/styled-components-carousel/issues"
   },
