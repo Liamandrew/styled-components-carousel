@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 import { Props } from './Carousel';
-import { Slider } from './sliderStyles';
-import { getPreSlideCount } from './helpers';
+import Track from './Track';
+import Slide from './Slide';
+import { getPreSlideCount, getSliderStyles } from './helpers';
 
 export type SliderProps = Props & {
     previousActive: number;
@@ -11,9 +13,18 @@ export type SliderProps = Props & {
     debug?: boolean;
 };
 
+const Slider = styled.div`
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    width: 100%;
+`;
+
 const renderSlides = (
     children: React.ReactNode,
     slideCount: number,
+    slideWidth: number = 0,
     slidesToShow: number,
     infinite?: boolean,
     center?: boolean,
@@ -25,10 +36,10 @@ const renderSlides = (
 
     React.Children.forEach(children, (child, index) => {
         slides.push(
-            <div key={`slide${index}`} className="slide">
+            <Slide width={slideWidth} key={`slide${index}`}>
                 {child}
                 {debug && <p>{`slide ${index}`}</p>}
-            </div>,
+            </Slide>,
         );
 
         if (infinite) {
@@ -44,20 +55,20 @@ const renderSlides = (
                 })
             ) {
                 preClones.push(
-                    <div key={`slide-pre${-preCloneNo}`} className="slide">
+                    <Slide width={slideWidth} key={`slide-pre${-preCloneNo}`}>
                         {child}
                         {debug && <p>{`pre clone ${preCloneNo}`}</p>}
-                    </div>,
+                    </Slide>,
                 );
             }
 
             const postCloneNo = index + slideCount;
 
             postClones.push(
-                <div key={`slide-post${postCloneNo}`} className="slide">
+                <Slide width={slideWidth} key={`slide-post${postCloneNo}`}>
                     {child}
                     {debug && <p>{`post clone ${postCloneNo}`}</p>}
-                </div>,
+                </Slide>,
             );
         }
     });
@@ -76,10 +87,24 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
     onWindowResize,
     debug,
 }) => {
-    const [sliderWidth, setSliderWidth] = useState(0);
     const sliderRef = useRef<HTMLDivElement>(null);
     const slideCount = React.Children.count(children);
+    const [sliderWidth, setSliderWidth] = useState(0);
+    const [styles, setStyles] = useState(
+        getSliderStyles({
+            previousActive,
+            active,
+            infiniteActive,
+            slideCount,
+            slidesToShow,
+            center,
+            centerPadding,
+            infinite,
+            sliderWidth,
+        }),
+    );
 
+    // Handle window resize
     useEffect(() => {
         const handleWindowResize = debounce(() => {
             onWindowResize();
@@ -96,21 +121,36 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
         };
     }, [onWindowResize]);
 
+    useEffect(() => {
+        setStyles(
+            getSliderStyles({
+                previousActive,
+                active,
+                infiniteActive,
+                slideCount,
+                slidesToShow,
+                center,
+                centerPadding,
+                infinite,
+                sliderWidth,
+            }),
+        );
+    }, [previousActive, active, infiniteActive, slidesToShow, center, centerPadding, infinite, sliderWidth]);
+
     return (
-        <Slider
-            className="carousel"
-            ref={sliderRef}
-            previousActive={previousActive}
-            active={active}
-            infiniteActive={infiniteActive}
-            slideCount={slideCount}
-            slidesToShow={slidesToShow}
-            center={center}
-            centerPadding={centerPadding}
-            infinite={infinite}
-            sliderWidth={sliderWidth}
-        >
-            <div className="track">{renderSlides(children, slideCount, slidesToShow, infinite, center, debug)}</div>
+        <Slider ref={sliderRef}>
+            <Track
+                width={styles.trackWidth}
+                center={center}
+                centerPadding={centerPadding}
+                previousActive={previousActive}
+                active={active}
+                infiniteActive={infiniteActive}
+                slideWidth={styles.slideWidth}
+                slideOffset={styles.slideOffset}
+            >
+                {renderSlides(children, slideCount, styles.slideWidth, slidesToShow, infinite, center, debug)}
+            </Track>
         </Slider>
     );
 };
