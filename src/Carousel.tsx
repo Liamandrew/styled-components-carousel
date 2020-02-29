@@ -12,6 +12,7 @@ export type CarouselSettings = {
     infinite?: boolean;
     showIndicator?: boolean;
     showArrows?: boolean;
+    swipeable?: boolean;
 };
 
 export type Breakpoint = {
@@ -43,6 +44,7 @@ const SliderWrapper = styled.div`
 const Component: React.FC<Props & { debug?: boolean }> = ({
     showIndicator = true,
     showArrows = true,
+    swipeable = true,
     slidesToShow = 1,
     centerPadding = 0,
     breakpoints,
@@ -61,6 +63,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                 slidesToShow,
                 showArrows,
                 showIndicator,
+                swipeable,
                 centerPadding,
             },
             breakpoints,
@@ -96,6 +99,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                                     slidesToShow,
                                     showArrows,
                                     showIndicator,
+                                    swipeable,
                                     centerPadding,
                                 },
                                 breakpoints,

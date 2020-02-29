@@ -4,6 +4,7 @@ import debounce from 'lodash.debounce';
 import { Props } from './Carousel';
 import Track from './Track';
 import Slide from './Slide';
+import Swipeable from './Swipeable';
 import { getPreSlideCount, getSliderStyles } from './helpers';
 
 export type SliderProps = Props & {
@@ -85,6 +86,7 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
     centerPadding,
     infinite,
     onWindowResize,
+    swipeable,
     debug,
 }) => {
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -139,18 +141,20 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
 
     return (
         <Slider ref={sliderRef}>
-            <Track
-                width={styles.trackWidth}
-                center={center}
-                centerPadding={centerPadding}
-                previousActive={previousActive}
-                active={active}
-                infiniteActive={infiniteActive}
-                slideWidth={styles.slideWidth}
-                slideOffset={styles.slideOffset}
-            >
-                {renderSlides(children, slideCount, styles.slideWidth, slidesToShow, infinite, center, debug)}
-            </Track>
+            <Swipeable swipeable={swipeable}>
+                <Track
+                    width={styles.trackWidth}
+                    center={center}
+                    centerPadding={centerPadding}
+                    previousActive={previousActive}
+                    active={active}
+                    infiniteActive={infiniteActive}
+                    slideWidth={styles.slideWidth}
+                    slideOffset={styles.slideOffset}
+                >
+                    {renderSlides(children, slideCount, styles.slideWidth, slidesToShow, infinite, center, debug)}
+                </Track>
+            </Swipeable>
         </Slider>
     );
 };
