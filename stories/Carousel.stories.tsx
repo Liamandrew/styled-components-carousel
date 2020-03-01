@@ -49,6 +49,7 @@ export const carouselWithBreakpoints = () => (
                     slidesToShow: 1,
                     showArrows: false,
                     showIndicator: false,
+                    swipeable: true,
                 },
             },
             {
@@ -57,6 +58,7 @@ export const carouselWithBreakpoints = () => (
                     slidesToShow: 3,
                     showArrows: false,
                     showIndicator: true,
+                    swipeable: true,
                 },
             },
             {
@@ -66,6 +68,7 @@ export const carouselWithBreakpoints = () => (
                     showArrows: true,
                     showIndicator: true,
                     center: true,
+                    swipeable: true,
                 },
             },
         ]}

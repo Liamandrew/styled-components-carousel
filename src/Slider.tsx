@@ -4,13 +4,14 @@ import debounce from 'lodash.debounce';
 import { Props } from './Carousel';
 import Track from './Track';
 import Slide from './Slide';
-import Swipeable from './Swipeable';
+import Swipeable, { SwipeDirection } from './Swipeable';
 import { getPreSlideCount, getSliderStyles } from './helpers';
 
-export type SliderProps = Props & {
+type SliderProps = Props & {
     previousActive: number;
     active: number;
     infiniteActive: number;
+    onSwipe: (direction: SwipeDirection) => void;
     debug?: boolean;
 };
 
@@ -87,6 +88,7 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
     infinite,
     onWindowResize,
     swipeable,
+    onSwipe,
     debug,
 }) => {
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -94,9 +96,6 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
     const [sliderWidth, setSliderWidth] = useState(0);
     const [styles, setStyles] = useState(
         getSliderStyles({
-            previousActive,
-            active,
-            infiniteActive,
             slideCount,
             slidesToShow,
             center,
@@ -126,9 +125,6 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
     useEffect(() => {
         setStyles(
             getSliderStyles({
-                previousActive,
-                active,
-                infiniteActive,
                 slideCount,
                 slidesToShow,
                 center,
@@ -141,7 +137,7 @@ const Component: React.FC<SliderProps & { onWindowResize: () => void }> = ({
 
     return (
         <Slider ref={sliderRef}>
-            <Swipeable swipeable={swipeable}>
+            <Swipeable swipeable={swipeable} xMovementTrigger={styles.slideWidth / 2} onSwipe={onSwipe}>
                 <Track
                     width={styles.trackWidth}
                     center={center}

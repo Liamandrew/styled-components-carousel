@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components';
 import { Breakpoint, CarouselSettings } from './Carousel';
-import { SliderProps } from './Slider';
+import { SwipeDirection } from './Swipeable';
 
 type SlideCountParams = {
     slideCount: number;
@@ -9,9 +9,13 @@ type SlideCountParams = {
     center?: boolean;
 };
 
-type SliderStyleProps = SliderProps & {
+type SliderStyleProps =  {
     sliderWidth: number;
     slideCount: number;
+    slidesToShow?: number;
+    center?: boolean;
+    centerPadding?: number;
+    infinite?: boolean;
 };
 
 export const getPreSlideCount = ({ slideCount, slidesToShow, infinite, center }: SlideCountParams) => {
@@ -106,6 +110,14 @@ export const matchBreakpoint = (size: number, settings: CarouselSettings, breakp
     return settings;
 };
 
+export const getSwipeDirection = (movementX: number) => {
+    if (movementX < 0) {
+        return SwipeDirection.Left;
+    }
+
+    return SwipeDirection.Right;
+};
+
 export const getSliderStyles = ({
     slideCount,
     slidesToShow = 1,
@@ -162,10 +174,10 @@ export const getSliderStyles = ({
     }
 
     return {
-        slideWidth,
         slideOffset,
         trackWidth,
         centerPadding,
+        slideWidth: slideWidth || 0,
     };
 };
 
