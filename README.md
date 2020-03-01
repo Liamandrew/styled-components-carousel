@@ -58,6 +58,7 @@ const Example = () => (
 | infinite | boolean | No | Should the carousel infinitely scroll the items | False |
 | showIndicator | boolean | No | Should the bottom item indicator be shown? | True |
 | showArrows | boolean | No | Should the side navigation arrows be shown? | True |
+| swipeable | boolean | No | Is the carousel swipeable? | True |
 | debug | boolean | No | A dev helper prop for debugging development | False |
 | slidesToShow  | number | No | The number of slides to show at once. | 1       |
 | centerPadding | number | No | Used in conjunction with center property to adding padding to center card | 0 |

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Slider from './Slider';
 import Indicator from './Indicator';
 import Arrow, { ArrowType } from './Arrow';
+import { SwipeDirection } from './Swipeable';
 import { canGoNext, canGoPrevious, getIndexForAction, matchBreakpoint } from './helpers';
 
 export type CarouselSettings = {
@@ -12,6 +13,7 @@ export type CarouselSettings = {
     infinite?: boolean;
     showIndicator?: boolean;
     showArrows?: boolean;
+    swipeable?: boolean;
 };
 
 export type Breakpoint = {
@@ -43,6 +45,7 @@ const SliderWrapper = styled.div`
 const Component: React.FC<Props & { debug?: boolean }> = ({
     showIndicator = true,
     showArrows = true,
+    swipeable = true,
     slidesToShow = 1,
     centerPadding = 0,
     breakpoints,
@@ -61,6 +64,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                 slidesToShow,
                 showArrows,
                 showIndicator,
+                swipeable,
                 centerPadding,
             },
             breakpoints,
@@ -96,6 +100,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                                     slidesToShow,
                                     showArrows,
                                     showIndicator,
+                                    swipeable,
                                     centerPadding,
                                 },
                                 breakpoints,
@@ -103,6 +108,28 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                         )
                     }
                     debug={debug}
+                    onSwipe={(direction: SwipeDirection) => {
+                        let newActive = active;
+
+                        if (
+                            direction === SwipeDirection.Left &&
+                            canGoNext(
+                                active,
+                                childrenCount,
+                                activeSettings.slidesToShow || slidesToShow,
+                                activeSettings.infinite,
+                            )
+                        ) {
+                            newActive = active + 1;
+                        } else if (
+                            direction === SwipeDirection.Right &&
+                            canGoPrevious(active, activeSettings.infinite)
+                        ) {
+                            newActive = active - 1;
+                        }
+
+                        setActive(getIndexForAction(active, newActive, childrenCount));
+                    }}
                     {...activeSettings}
                 >
                     {children}

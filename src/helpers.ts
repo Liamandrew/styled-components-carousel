@@ -1,10 +1,21 @@
+import { keyframes } from 'styled-components';
 import { Breakpoint, CarouselSettings } from './Carousel';
+import { SwipeDirection } from './Swipeable';
 
 type SlideCountParams = {
     slideCount: number;
     slidesToShow: number;
     infinite?: boolean;
     center?: boolean;
+};
+
+type SliderStyleProps =  {
+    sliderWidth: number;
+    slideCount: number;
+    slidesToShow?: number;
+    center?: boolean;
+    centerPadding?: number;
+    infinite?: boolean;
 };
 
 export const getPreSlideCount = ({ slideCount, slidesToShow, infinite, center }: SlideCountParams) => {
@@ -97,4 +108,106 @@ export const matchBreakpoint = (size: number, settings: CarouselSettings, breakp
     }
 
     return settings;
+};
+
+export const getSwipeDirection = (movementX: number) => {
+    if (movementX < 0) {
+        return SwipeDirection.Left;
+    }
+
+    return SwipeDirection.Right;
+};
+
+export const getSliderStyles = ({
+    slideCount,
+    slidesToShow = 1,
+    center,
+    centerPadding = 0,
+    infinite,
+    sliderWidth,
+}: SliderStyleProps) => {
+    let slideWidth;
+    let slideOffset;
+    let slidesToOffset = 0;
+    let trackWidth;
+    let centerPaddingAdj;
+
+    const totalSlideCount = getTotalSlideCount({
+        slideCount,
+        slidesToShow,
+        infinite,
+        center,
+    });
+
+    if (sliderWidth) {
+        centerPaddingAdj = center ? centerPadding * 2 : 0;
+
+        slideWidth = Math.ceil((sliderWidth - centerPaddingAdj) / slidesToShow);
+
+        if (infinite) {
+            slidesToOffset = -getPreSlideCount({
+                slideCount,
+                slidesToShow,
+                infinite,
+                center,
+            });
+
+            if (slidesToShow >= slideCount) {
+                slidesToOffset += 1 + slidesToShow - slideCount;
+            }
+
+            if (center) {
+                slidesToOffset += Math.floor(slidesToShow / 2);
+            }
+        } else if (center) {
+            slidesToOffset = Math.floor(slidesToShow / 2);
+
+            if (slidesToShow !== 1) {
+                const currentSlideFit = sliderWidth / slideWidth;
+                const newSlidesToShow = currentSlideFit + slidesToOffset;
+                slideWidth = Math.ceil((sliderWidth - centerPaddingAdj) / newSlidesToShow);
+            }
+        }
+
+        slideOffset = slidesToOffset * slideWidth;
+        trackWidth = totalSlideCount * slideWidth;
+    }
+
+    return {
+        slideOffset,
+        trackWidth,
+        centerPadding,
+        slideWidth: slideWidth || 0,
+    };
+};
+
+const getTransform = (percentage: string, xValue: number) => `
+    ${percentage}% {
+        transform: translate3d(${xValue}px, 0px, 0px);
+    }`;
+
+export const getSlideAnimation = (
+    previousActive: number,
+    active: number,
+    infiniteActive: number,
+    slideWidth?: number,
+    slideOffset?: number,
+) => {
+    const start = slideWidth && (slideOffset || slideOffset === 0) ? previousActive * slideWidth * -1 + slideOffset : 0;
+    const end = slideWidth && (slideOffset || slideOffset === 0) ? active * slideWidth * -1 + slideOffset : 0;
+    let infiniteEnd;
+    if (infiniteActive !== active && slideWidth && (slideOffset || slideOffset === 0)) {
+        infiniteEnd = infiniteActive * slideWidth * -1 + slideOffset;
+    }
+
+    const zero = getTransform('0', start);
+    const ninetyNine = infiniteEnd ? getTransform('99.99', end) : '';
+    const oneHundred = getTransform('100', infiniteEnd || end);
+
+    const animation = `
+        ${zero}
+        ${ninetyNine}
+        ${oneHundred}
+    `;
+    return keyframes`${animation}`;
 };

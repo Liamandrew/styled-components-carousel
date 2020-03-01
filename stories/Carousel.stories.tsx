@@ -4,7 +4,7 @@ import { boolean, number } from '@storybook/addon-knobs';
 import Carousel from '../src';
 
 export default {
-    title: 'Design System/Carousel',
+    title: 'Carousel',
     component: Carousel,
 };
 
@@ -30,6 +30,7 @@ export const carouselWithKnobs = () => (
         infinite={boolean('Infinite', true)}
         showArrows={boolean('Show Arrows', true)}
         slidesToShow={number('Slides to Show', 4)}
+        swipeable={boolean('Swipeable', true)}
         debug={boolean('Debug', false)}
     >
         {[...Array(number('Number of Cards', 3))].map((e, i) => Slide(`${i + 1}`))}
@@ -48,6 +49,7 @@ export const carouselWithBreakpoints = () => (
                     slidesToShow: 1,
                     showArrows: false,
                     showIndicator: false,
+                    swipeable: true,
                 },
             },
             {
@@ -56,6 +58,7 @@ export const carouselWithBreakpoints = () => (
                     slidesToShow: 3,
                     showArrows: false,
                     showIndicator: true,
+                    swipeable: true,
                 },
             },
             {
@@ -65,6 +68,7 @@ export const carouselWithBreakpoints = () => (
                     showArrows: true,
                     showIndicator: true,
                     center: true,
+                    swipeable: true,
                 },
             },
         ]}
