@@ -9,7 +9,7 @@ type SlideCountParams = {
     center?: boolean;
 };
 
-type SliderStyleProps =  {
+type SliderStyleProps = {
     sliderWidth: number;
     slideCount: number;
     slidesToShow?: number;
