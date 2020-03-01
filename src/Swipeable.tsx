@@ -12,28 +12,55 @@ type Props = {
     onSwipe?: (direction: SwipeDirection) => void;
 };
 
-const initialState = {
+type State = {
+    swiping: boolean;
+    movementX: number;
+    startX: number;
+};
+
+const initialState: State = {
     swiping: false,
     movementX: 0,
+    startX: 0,
 };
 
 const Swipeable: React.FC<Props> = ({ swipeable, xMovementTrigger, onSwipe, children }) => {
     const [swipingState, setSwipingState] = useState(initialState);
 
-    const onSwipeStart = (event: React.MouseEvent<HTMLDivElement>) => {
+    const onSwipeStart = (movementX: number, startX: number = 0) => {
         if (swipeable) {
             setSwipingState({
                 swiping: true,
-                movementX: event.movementX,
+                movementX,
+                startX,
             });
         }
     };
 
-    const onSwipeMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const onMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+        onSwipeStart(event.movementX);
+    };
+
+    const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+        const touch = event.touches[0];
+        onSwipeStart(0, touch.clientX);
+    };
+
+    const onMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
         if (swipingState.swiping) {
             setSwipingState({
                 ...swipingState,
                 movementX: swipingState.movementX + event.movementX,
+            });
+        }
+    };
+
+    const onTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+        const touch = event.touches[0];
+        if (swipingState.swiping) {
+            setSwipingState({
+                ...swipingState,
+                movementX: touch.clientX - swipingState.startX,
             });
         }
     };
@@ -54,10 +81,14 @@ const Swipeable: React.FC<Props> = ({ swipeable, xMovementTrigger, onSwipe, chil
 
     return (
         <div
-            onMouseDown={onSwipeStart}
-            onMouseMove={onSwipeMove}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
             onMouseUp={onSwipeEnd}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onSwipeEnd}
             style={{
+                cursor: 'pointer',
                 transform: `translate3d(${swipingState.movementX}px, 0px, 0px)`,
             }}
         >
