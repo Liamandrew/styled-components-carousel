@@ -14,7 +14,7 @@ describe('Track', () => {
                 infiniteActive={0}
                 slideWidth={70}
                 slideOffset={30}
-            />
+            />,
         );
 
         expect(container).toMatchSnapshot();
@@ -31,7 +31,7 @@ describe('Track', () => {
                 infiniteActive={0}
                 slideWidth={70}
                 slideOffset={30}
-            />
+            />,
         );
 
         expect(container).toMatchSnapshot();

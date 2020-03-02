@@ -249,7 +249,7 @@ describe('helpers', () => {
             expect(result).toEqual(settingsSmall.settings);
         });
 
-        it('should return the largest setting if it\'s a match', () => {
+        it("should return the largest setting if it's a match", () => {
             const size = 100;
             const settings = {
                 swipeable: false,
