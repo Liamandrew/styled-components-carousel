@@ -24,7 +24,9 @@ This component expects that you will have the following packages installed:
 
 `yarn add styled-components-carousel`
 
-### Usage
+## Examples
+
+### Basic Usage
 
 ```javascript
 import Carousel from 'styled-components-carousel';
@@ -36,6 +38,62 @@ const Example = () => (
         showArrows
         showIndicator
         slidesToShow={3}
+    >
+        <div>
+            <span>1</span>
+        </div>
+        <div>
+            <span>2</span>
+        </div>
+        <div>
+            <span>3</span>
+        </div>
+    </Carousel>
+);
+```
+
+### Breakpoints Usage
+
+You can define custom settings per breakpoint for truly responsive behaviour.
+
+```javascript
+import Carousel from 'styled-components-carousel';
+
+const Example = () => (
+    <Carousel
+        slidesToShow={3}
+        center
+        centerPadding={30}
+        breakpoints={[
+            {
+                size: 200,
+                settings: {
+                    slidesToShow: 1,
+                    showArrows: false,
+                    showIndicator: false,
+                    swipeable: true,
+                },
+            },
+            {
+                size: 600,
+                settings: {
+                    slidesToShow: 3,
+                    showArrows: false,
+                    showIndicator: true,
+                    swipeable: true,
+                },
+            },
+            {
+                size: 1000,
+                settings: {
+                    slidesToShow: 4,
+                    showArrows: true,
+                    showIndicator: true,
+                    center: true,
+                    swipeable: true,
+                },
+            },
+        ]}
     >
         <div>
             <span>1</span>
