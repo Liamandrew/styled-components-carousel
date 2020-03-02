@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Slide should match the snapshot when width is defined 1`] = `
+<div>
+  <div
+    class="sc-AxjAm bmqcze"
+    width="300"
+  />
+</div>
+`;
+
+exports[`Slide should match the snapshot when width is undefined 1`] = `
+<div>
+  <div
+    class="sc-AxjAm eOSXlV"
+    width="0"
+  />
+</div>
+`;

@@ -6,7 +6,7 @@ type Props = {
     slidesToShow: number;
     infinite?: boolean;
     active: number;
-    onPress: (index: number) => void;
+    onClick: (index: number) => void;
 };
 
 export const IndicatorWrapper = styled.div`
@@ -45,14 +45,15 @@ const getNumberOfIndicators = (items: number, slidesToShow: number, infinite?: b
     return items - slidesToShow + 1;
 };
 
-const Component: React.FC<Props> = ({ items, slidesToShow, infinite, active, onPress }) => {
+const Component: React.FC<Props> = ({ items, slidesToShow, infinite, active, onClick }) => {
     return (
         <IndicatorWrapper>
             {[...Array(getNumberOfIndicators(items, slidesToShow, infinite))].map((e, i) => (
                 <Indicator
                     key={`carousel-indicator-${i}`}
+                    data-testid={`carousel-indicator-${i}`}
                     highlighted={i === active % items}
-                    onClick={() => onPress(i)}
+                    onClick={() => onClick(i)}
                 />
             ))}
         </IndicatorWrapper>

@@ -155,7 +155,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                     slidesToShow={activeSettings.slidesToShow || slidesToShow}
                     infinite={activeSettings.infinite}
                     active={infiniteActive}
-                    onPress={index => setActive(getIndexForAction(active, index, childrenCount))}
+                    onClick={index => setActive(getIndexForAction(active, index, childrenCount))}
                 />
             )}
         </CarouselWrapper>
