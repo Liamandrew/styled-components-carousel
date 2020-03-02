@@ -12,7 +12,7 @@ Heavily inspired by [react-slick](https://github.com/akiran/react-slick) with a 
 
 This component expects that you will have the following packages installed:
 * [styled-components](https://github.com/styled-components/styled-components)
-* [react](https://github.com/facebook/react) *minimum version 16.8.6*
+* [react](https://github.com/facebook/react)
 
 ### Installation
 
