@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel should render a carousel with default settings 1`] = `
+<div>
+  <div
+    class="sc-AxheI cbWmFP"
+  >
+    <div
+      class="sc-Axmtr ljaaBB"
+    >
+      <button
+        class="sc-AxgMl hGkwpW"
+        data-testid="arrow-previous"
+        disabled=""
+      >
+        ‹
+      </button>
+      <div
+        class="sc-AxiKw cVFcdW"
+      >
+        <div
+          style="cursor: pointer; transform: translate3d(0px, 0px, 0px);"
+        >
+          <div
+            class="sc-AxjAm fdWRDs"
+          >
+            <div
+              class="sc-AxirZ exXtW"
+              width="0"
+            >
+              <div>
+                hello world
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="sc-AxgMl hGkwpW"
+        data-testid="arrow-next"
+        disabled=""
+      >
+        ›
+      </button>
+    </div>
+    <div
+      class="sc-AxhCb duHzzX"
+    >
+      <button
+        class="sc-AxhUy gYgxmw"
+        data-testid="carousel-indicator-0"
+      />
+    </div>
+  </div>
+</div>
+`;

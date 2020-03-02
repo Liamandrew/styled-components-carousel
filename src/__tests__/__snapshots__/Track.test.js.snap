@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Track should match the snapshot 1`] = `
+<div>
+  <div
+    class="sc-AxjAm gjTduM"
+    width="300"
+  />
+</div>
+`;
+
+exports[`Track should match the snapshot for center track 1`] = `
+<div>
+  <div
+    class="sc-AxjAm iGyFfE"
+    width="300"
+  />
+</div>
+`;

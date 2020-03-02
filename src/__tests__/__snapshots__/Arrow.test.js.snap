@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Arrow should match the snapshot for Next arrow 1`] = `
+<div>
+  <button
+    class="sc-AxjAm dPRmsH"
+    data-testid="arrow-next"
+  >
+    ›
+  </button>
+</div>
+`;
+
+exports[`Arrow should match the snapshot for Previous arrow 1`] = `
+<div>
+  <button
+    class="sc-AxjAm dPRmsH"
+    data-testid="arrow-previous"
+  >
+    ‹
+  </button>
+</div>
+`;

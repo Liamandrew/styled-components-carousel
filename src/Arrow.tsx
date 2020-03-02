@@ -16,18 +16,18 @@ const Arrow = styled.button<Partial<Props>>`
     width: 32px;
     height: 32px;
     padding: 8px;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #dddddd;
     border-radius: 50%;
     background-color: ${props => (props.disabled ? '#F3F3F3' : '#FFFFFF')};
 `;
 
 const Component: React.FC<Props> = ({ type, onClick, disabled }) =>
     type === ArrowType.previous ? (
-        <Arrow disabled={disabled} onClick={onClick}>
+        <Arrow disabled={disabled} onClick={onClick} data-testid="arrow-previous">
             &#8249;
         </Arrow>
     ) : (
-        <Arrow disabled={disabled} onClick={onClick}>
+        <Arrow disabled={disabled} onClick={onClick} data-testid="arrow-next">
             &#8250;
         </Arrow>
     );
