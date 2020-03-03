@@ -18,6 +18,7 @@ const Arrow = styled.button<Partial<Props>>`
     padding: 8px;
     border: 1px solid #dddddd;
     border-radius: 50%;
+    outline: 0;
     background-color: ${props => (props.disabled ? '#F3F3F3' : '#FFFFFF')};
 `;
 

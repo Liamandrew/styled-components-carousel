@@ -9,7 +9,7 @@ exports[`Carousel should render a carousel with default settings 1`] = `
       class="sc-Axmtr ljaaBB"
     >
       <button
-        class="sc-AxgMl hGkwpW"
+        class="sc-AxgMl eyYDNl"
         data-testid="arrow-previous"
         disabled=""
       >
@@ -36,7 +36,7 @@ exports[`Carousel should render a carousel with default settings 1`] = `
         </div>
       </div>
       <button
-        class="sc-AxgMl hGkwpW"
+        class="sc-AxgMl eyYDNl"
         data-testid="arrow-next"
         disabled=""
       >
@@ -47,7 +47,7 @@ exports[`Carousel should render a carousel with default settings 1`] = `
       class="sc-AxhCb duHzzX"
     >
       <button
-        class="sc-AxhUy gYgxmw"
+        class="sc-AxhUy jiZuIL"
         data-testid="carousel-indicator-0"
       />
     </div>
