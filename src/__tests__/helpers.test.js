@@ -7,6 +7,7 @@ import {
     canGoNext,
     matchBreakpoint,
     getSwipeDirection,
+    isValidSwipe,
 } from '../helpers';
 
 describe('helpers', () => {
@@ -319,6 +320,24 @@ describe('helpers', () => {
             const result = getSwipeDirection(1);
 
             expect(result).toEqual('Right');
+        });
+    });
+
+    describe('isValidSwipe', () => {
+        it('should return false if movement is less than trigger', () => {
+            const movement = 50;
+            const trigger = 100;
+            const result = isValidSwipe(movement, trigger);
+
+            expect(result).toBeFalsy();
+        });
+
+        it('should return true if movement is greater than trigger', () => {
+            const movement = 150;
+            const trigger = 100;
+            const result = isValidSwipe(movement, trigger);
+
+            expect(result).toBeTruthy();
         });
     });
 });
