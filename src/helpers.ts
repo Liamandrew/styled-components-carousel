@@ -118,6 +118,8 @@ export const getSwipeDirection = (movementX: number) => {
     return SwipeDirection.Right;
 };
 
+export const isValidSwipe = (movement: number, trigger: number) => trigger < Math.abs(movement);
+
 export const getSliderStyles = ({
     slideCount,
     slidesToShow = 1,

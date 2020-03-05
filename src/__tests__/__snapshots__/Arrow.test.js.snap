@@ -3,7 +3,7 @@
 exports[`Arrow should match the snapshot for Next arrow 1`] = `
 <div>
   <button
-    class="sc-AxjAm dPRmsH"
+    class="sc-AxjAm gcAEno"
     data-testid="arrow-next"
   >
     ›
@@ -14,7 +14,7 @@ exports[`Arrow should match the snapshot for Next arrow 1`] = `
 exports[`Arrow should match the snapshot for Previous arrow 1`] = `
 <div>
   <button
-    class="sc-AxjAm dPRmsH"
+    class="sc-AxjAm gcAEno"
     data-testid="arrow-previous"
   >
     ‹

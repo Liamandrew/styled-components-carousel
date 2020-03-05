@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getSwipeDirection } from './helpers';
+import { getSwipeDirection, isValidSwipe } from './helpers';
 
 export enum SwipeDirection {
     Left = 'Left',
@@ -48,26 +48,46 @@ const Swipeable: React.FC<Props> = ({ swipeable, xMovementTrigger, onSwipe, chil
 
     const onMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
         if (swipingState.swiping) {
-            setSwipingState({
-                ...swipingState,
-                movementX: swipingState.movementX + event.movementX,
-            });
+            if (isValidSwipe(swipingState.movementX + event.movementX, xMovementTrigger * 2) && onSwipe) {
+                onSwipe(getSwipeDirection(swipingState.movementX));
+
+                setSwipingState({
+                    ...swipingState,
+                    movementX: 0,
+                    swiping: false,
+                });
+            } else {
+                setSwipingState({
+                    ...swipingState,
+                    movementX: swipingState.movementX + event.movementX,
+                });
+            }
         }
     };
 
     const onTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
         const touch = event.touches[0];
         if (swipingState.swiping) {
-            setSwipingState({
-                ...swipingState,
-                movementX: touch.clientX - swipingState.startX,
-            });
+            if (isValidSwipe(touch.clientX - swipingState.startX, xMovementTrigger * 2) && onSwipe) {
+                onSwipe(getSwipeDirection(swipingState.movementX));
+
+                setSwipingState({
+                    ...swipingState,
+                    movementX: 0,
+                    swiping: false,
+                });
+            } else {
+                setSwipingState({
+                    ...swipingState,
+                    movementX: touch.clientX - swipingState.startX,
+                });
+            }
         }
     };
 
     const onSwipeEnd = () => {
         if (swipingState.swiping) {
-            if (xMovementTrigger < Math.abs(swipingState.movementX)) {
+            if (isValidSwipe(swipingState.movementX, xMovementTrigger)) {
                 if (onSwipe) onSwipe(getSwipeDirection(swipingState.movementX));
             }
 

@@ -21,6 +21,7 @@ export const Indicator = styled.button<{ highlighted: boolean }>`
     border-radius: 50%;
     padding: 0;
     border: 0;
+    outline: 0;
     margin-left: 14px;
     margin-right: 14px;
     background-color: ${props => (props.highlighted ? '#444444' : '#DDDDDD')};
