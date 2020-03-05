@@ -4,7 +4,7 @@ A simple React Carousel component written in Typescript and built with [styled-c
 
 Heavily inspired by [react-slick](https://github.com/akiran/react-slick) with a simplified API and small behaviour changes.
 
-![Alt Text](https://media.giphy.com/media/ge2bPSJZNt8CXMk9Z4/giphy.gif)
+![Alt Text](https://media.giphy.com/media/dVv2OHM8BVkkAJjDBI/giphy.gif)
 
 ## Getting Started
 
