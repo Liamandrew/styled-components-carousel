@@ -135,3 +135,11 @@ const Example = () => (
 ### Build
 
 `yarn build`
+
+## RoadMap (open to feature requests)
+
+* Accessibility support
+* Custom slide animation
+* Custom arrow component
+* Custom indicator component
+* Vertical track
