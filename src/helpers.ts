@@ -195,21 +195,30 @@ export const getSlideAnimation = (
     slideWidth?: number,
     slideOffset?: number,
 ) => {
-    const start = slideWidth && (slideOffset || slideOffset === 0) ? previousActive * slideWidth * -1 + slideOffset : 0;
-    const end = slideWidth && (slideOffset || slideOffset === 0) ? active * slideWidth * -1 + slideOffset : 0;
-    let infiniteEnd;
-    if (infiniteActive !== active && slideWidth && (slideOffset || slideOffset === 0)) {
-        infiniteEnd = infiniteActive * slideWidth * -1 + slideOffset;
+    let start = 0;
+    let end = 0;
+    let infiniteSwap = 0;
+
+    if (slideWidth && (slideOffset || slideOffset === 0)) {
+        const slideDelta = -1 * slideWidth;
+        start = previousActive * slideDelta + slideOffset;
+        end = active * slideDelta + slideOffset;
+        infiniteSwap = start;
+
+        if (infiniteActive !== active) {
+            end = infiniteActive * slideDelta + slideOffset;
+            infiniteSwap = infiniteActive > previousActive ? end + slideDelta : end - slideDelta;
+        }
     }
 
-    const zero = getTransform('0', start);
-    const ninetyNine = infiniteEnd ? getTransform('99.99', end) : '';
-    const oneHundred = getTransform('100', infiniteEnd || end);
+    const startTransform = getTransform('0', start);
+    const infiniteSwapTransform = getTransform('0.001', infiniteSwap);
+    const endTransform = getTransform('100', end);
 
     const animation = `
-        ${zero}
-        ${ninetyNine}
-        ${oneHundred}
+        ${startTransform}
+        ${infiniteSwapTransform}
+        ${endTransform}
     `;
     return keyframes`${animation}`;
 };
