@@ -197,27 +197,23 @@ export const getSlideAnimation = (
 ) => {
     let start = 0;
     let end = 0;
-    let infiniteSwap = 0;
 
     if (slideWidth && (slideOffset || slideOffset === 0)) {
         const slideDelta = -1 * slideWidth;
         start = previousActive * slideDelta + slideOffset;
         end = active * slideDelta + slideOffset;
-        infiniteSwap = start;
 
         if (infiniteActive !== active) {
             end = infiniteActive * slideDelta + slideOffset;
-            infiniteSwap = infiniteActive > previousActive ? end + slideDelta : end - slideDelta;
+            start = infiniteActive > previousActive ? end + slideDelta : end - slideDelta;
         }
     }
 
     const startTransform = getTransform('0', start);
-    const infiniteSwapTransform = getTransform('0.001', infiniteSwap);
     const endTransform = getTransform('100', end);
 
     const animation = `
         ${startTransform}
-        ${infiniteSwapTransform}
         ${endTransform}
     `;
     return keyframes`${animation}`;

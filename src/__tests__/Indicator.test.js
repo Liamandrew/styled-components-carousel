@@ -15,6 +15,12 @@ describe('Indicator', () => {
         expect(container).toMatchSnapshot();
     });
 
+    it('should match the snapshot when slides to show is greater than items', () => {
+        const { container } = render(<Indicator items={3} slidesToShow={4} infinite active={2} onClick={onClick} />);
+
+        expect(container).toMatchSnapshot();
+    });
+
     it('should call onClick with the correct index', () => {
         const { container } = render(<Indicator items={3} slidesToShow={2} infinite active={2} onClick={onClick} />);
 
