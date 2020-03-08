@@ -30,6 +30,14 @@ exports[`Indicator should match the snapshot when slides to show is greater than
       class="sc-AxirZ kNLnTd"
       data-testid="carousel-indicator-0"
     />
+    <button
+      class="sc-AxirZ kNLnTd"
+      data-testid="carousel-indicator-1"
+    />
+    <button
+      class="sc-AxirZ dBFIEW"
+      data-testid="carousel-indicator-2"
+    />
   </div>
 </div>
 `;

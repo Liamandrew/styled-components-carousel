@@ -8,6 +8,7 @@ import {
     matchBreakpoint,
     getSwipeDirection,
     isValidSwipe,
+    isIndexFocused,
 } from '../helpers';
 
 describe('helpers', () => {
@@ -338,6 +339,24 @@ describe('helpers', () => {
             const result = isValidSwipe(movement, trigger);
 
             expect(result).toBeTruthy();
+        });
+    });
+
+    describe('isIndexFocused', () => {
+        it('should return true if the index is the same as the active', () => {
+            const index = 1;
+            const active = 1;
+            const result = isIndexFocused(index, active);
+
+            expect(result).toBeTruthy();
+        });
+
+        it('should return false if the index is different to the active', () => {
+            const index = 2;
+            const active = 1;
+            const result = isIndexFocused(index, active);
+
+            expect(result).toBeFalsy();
         });
     });
 });

@@ -14,6 +14,7 @@ export type CarouselSettings = {
     showIndicator?: boolean;
     showArrows?: boolean;
     swipeable?: boolean;
+    scaleOnFocus?: number;
 };
 
 export type Breakpoint = {
@@ -48,6 +49,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
     swipeable = true,
     slidesToShow = 1,
     centerPadding = 0,
+    scaleOnFocus = 1,
     breakpoints,
     center,
     infinite,
@@ -55,20 +57,18 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
     children,
 }) => {
     const childrenCount = React.Children.count(children);
+    const carouselSettings = {
+        center,
+        infinite,
+        slidesToShow,
+        showArrows,
+        showIndicator,
+        swipeable,
+        centerPadding,
+        scaleOnFocus,
+    };
     const [activeSettings, setActiveSettings] = useState(
-        matchBreakpoint(
-            window.innerWidth,
-            {
-                center,
-                infinite,
-                slidesToShow,
-                showArrows,
-                showIndicator,
-                swipeable,
-                centerPadding,
-            },
-            breakpoints,
-        ),
+        matchBreakpoint(window.innerWidth, carouselSettings, breakpoints),
     );
     const [{ previousActive, active, infiniteActive }, setActive] = useState({
         previousActive: 0,
@@ -91,21 +91,7 @@ const Component: React.FC<Props & { debug?: boolean }> = ({
                     active={active}
                     infiniteActive={infiniteActive}
                     onWindowResize={() =>
-                        setActiveSettings(
-                            matchBreakpoint(
-                                window.innerWidth,
-                                {
-                                    center,
-                                    infinite,
-                                    slidesToShow,
-                                    showArrows,
-                                    showIndicator,
-                                    swipeable,
-                                    centerPadding,
-                                },
-                                breakpoints,
-                            ),
-                        )
+                        setActiveSettings(matchBreakpoint(window.innerWidth, carouselSettings, breakpoints))
                     }
                     debug={debug}
                     onSwipe={(direction: SwipeDirection) => {

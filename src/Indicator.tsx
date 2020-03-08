@@ -34,18 +34,18 @@ export const Indicator = styled.button<{ highlighted: boolean }>`
     }
 `;
 
-const getNumberOfIndicators = (items: number, slidesToShow: number) => {
-    if (slidesToShow >= items) {
-        return 1;
+const getNumberOfIndicators = (items: number, slidesToShow: number, infinite?: boolean) => {
+    if (infinite || slidesToShow < items) {
+        return items;
     }
 
-    return items;
+    return 1;
 };
 
 const Component: React.FC<Props> = ({ items, slidesToShow, infinite, active, onClick }) => {
     return (
         <IndicatorWrapper>
-            {[...Array(getNumberOfIndicators(items, slidesToShow))].map((e, i) => (
+            {[...Array(getNumberOfIndicators(items, slidesToShow, infinite))].map((e, i) => (
                 <Indicator
                     key={`carousel-indicator-${i}`}
                     data-testid={`carousel-indicator-${i}`}

@@ -3,7 +3,7 @@
 exports[`Slide should match the snapshot when width is defined 1`] = `
 <div>
   <div
-    class="sc-AxjAm bmqcze"
+    class="sc-AxjAm epebAy"
     width="300"
   />
 </div>
@@ -12,8 +12,7 @@ exports[`Slide should match the snapshot when width is defined 1`] = `
 exports[`Slide should match the snapshot when width is undefined 1`] = `
 <div>
   <div
-    class="sc-AxjAm eOSXlV"
-    width="0"
+    class="sc-AxjAm cSilaZ"
   />
 </div>
 `;
