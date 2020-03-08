@@ -119,6 +119,7 @@ const Example = () => (
 | swipeable | boolean | No | Is the carousel swipeable? | True |
 | debug | boolean | No | A dev helper prop for debugging development | False |
 | slidesToShow  | number | No | The number of slides to show at once. | 1       |
+| scaleOnFocus  | number | No | How much should the focused item scale? | 1       |
 | centerPadding | number | No | Used in conjunction with center property to adding padding to center card | 0 |
 | breakpoints | array | No | An array of settings in order to have responsive behaviour for different screen sizes | undefined |
 

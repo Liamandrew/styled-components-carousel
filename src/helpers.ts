@@ -120,6 +120,8 @@ export const getSwipeDirection = (movementX: number) => {
 
 export const isValidSwipe = (movement: number, trigger: number) => trigger < Math.abs(movement);
 
+export const isIndexFocused = (index: number, active: number) => index === active;
+
 export const getSliderStyles = ({
     slideCount,
     slidesToShow = 1,
@@ -195,21 +197,26 @@ export const getSlideAnimation = (
     slideWidth?: number,
     slideOffset?: number,
 ) => {
-    const start = slideWidth && (slideOffset || slideOffset === 0) ? previousActive * slideWidth * -1 + slideOffset : 0;
-    const end = slideWidth && (slideOffset || slideOffset === 0) ? active * slideWidth * -1 + slideOffset : 0;
-    let infiniteEnd;
-    if (infiniteActive !== active && slideWidth && (slideOffset || slideOffset === 0)) {
-        infiniteEnd = infiniteActive * slideWidth * -1 + slideOffset;
+    let start = 0;
+    let end = 0;
+
+    if (slideWidth && (slideOffset || slideOffset === 0)) {
+        const slideDelta = -1 * slideWidth;
+        start = previousActive * slideDelta + slideOffset;
+        end = active * slideDelta + slideOffset;
+
+        if (infiniteActive !== active) {
+            end = infiniteActive * slideDelta + slideOffset;
+            start = infiniteActive > previousActive ? end + slideDelta : end - slideDelta;
+        }
     }
 
-    const zero = getTransform('0', start);
-    const ninetyNine = infiniteEnd ? getTransform('99.99', end) : '';
-    const oneHundred = getTransform('100', infiniteEnd || end);
+    const startTransform = getTransform('0', start);
+    const endTransform = getTransform('100', end);
 
     const animation = `
-        ${zero}
-        ${ninetyNine}
-        ${oneHundred}
+        ${startTransform}
+        ${endTransform}
     `;
     return keyframes`${animation}`;
 };

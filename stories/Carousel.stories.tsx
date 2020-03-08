@@ -18,7 +18,7 @@ const Background = styled.div`
 `;
 
 const Slide = (text: string) => (
-    <Background>
+    <Background key={`slide-${text}`}>
         <Title>{text}</Title>
     </Background>
 );
@@ -31,6 +31,7 @@ export const carouselWithKnobs = () => (
         showArrows={boolean('Show Arrows', true)}
         slidesToShow={number('Slides to Show', 4)}
         swipeable={boolean('Swipeable', true)}
+        scaleOnFocus={number('Scale on Focus', 1.1)}
         debug={boolean('Debug', false)}
     >
         {[...Array(number('Number of Cards', 3))].map((e, i) => Slide(`${i + 1}`))}
@@ -50,6 +51,7 @@ export const carouselWithBreakpoints = () => (
                     showArrows: false,
                     showIndicator: false,
                     swipeable: true,
+                    scaleOnFocus: 1.2,
                 },
             },
             {
@@ -59,6 +61,7 @@ export const carouselWithBreakpoints = () => (
                     showArrows: false,
                     showIndicator: true,
                     swipeable: true,
+                    scaleOnFocus: 1.1,
                 },
             },
             {
@@ -69,6 +72,7 @@ export const carouselWithBreakpoints = () => (
                     showIndicator: true,
                     center: true,
                     swipeable: true,
+                    scaleOnFocus: 1.1,
                 },
             },
         ]}

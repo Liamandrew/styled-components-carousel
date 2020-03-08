@@ -35,15 +35,11 @@ export const Indicator = styled.button<{ highlighted: boolean }>`
 `;
 
 const getNumberOfIndicators = (items: number, slidesToShow: number, infinite?: boolean) => {
-    if (infinite) {
+    if (infinite || slidesToShow < items) {
         return items;
     }
 
-    if (slidesToShow >= items) {
-        return 1;
-    }
-
-    return items - slidesToShow + 1;
+    return 1;
 };
 
 const Component: React.FC<Props> = ({ items, slidesToShow, infinite, active, onClick }) => {

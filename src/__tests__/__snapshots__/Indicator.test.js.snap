@@ -20,3 +20,24 @@ exports[`Indicator should match the snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`Indicator should match the snapshot when slides to show is greater than items 1`] = `
+<div>
+  <div
+    class="sc-AxjAm hxQek"
+  >
+    <button
+      class="sc-AxirZ kNLnTd"
+      data-testid="carousel-indicator-0"
+    />
+    <button
+      class="sc-AxirZ kNLnTd"
+      data-testid="carousel-indicator-1"
+    />
+    <button
+      class="sc-AxirZ dBFIEW"
+      data-testid="carousel-indicator-2"
+    />
+  </div>
+</div>
+`;
